@@ -3,7 +3,7 @@
 
 export type Industry =
   | 'restaurant' | 'fitness' | 'dental' | 'legal' | 'realestate'
-  | 'salon' | 'saas' | 'ecommerce' | 'photography' | 'consulting';
+  | 'salon' | 'barber' | 'saas' | 'ecommerce' | 'photography' | 'consulting';
 
 export type Tone = 'professional' | 'fun' | 'luxury';
 
@@ -26,6 +26,7 @@ export interface LandingData {
   featuresSub: string;
   testimonials: Testimonial[];
   pricing: PricingTier[];
+  pricingSub: string;
   cta: { headline: string; subheadline: string; button: string };
   footerTagline: string;
   theme: Theme;
@@ -44,6 +45,7 @@ export const INDUSTRIES: { value: Industry; label: string }[] = [
   { value: 'legal', label: '⚖️ Law Firm' },
   { value: 'realestate', label: '🏠 Real Estate' },
   { value: 'salon', label: '💅 Salon / Spa' },
+  { value: 'barber', label: '💈 Barbershop' },
   { value: 'saas', label: '💻 SaaS / Tech' },
   { value: 'ecommerce', label: '🛍️ E-commerce' },
   { value: 'photography', label: '📸 Photography' },
@@ -96,6 +98,8 @@ interface IndustryBank {
   stats: { value: string; label: string }[];
   testimonials: { name: string; role: string; quote: string }[];
   pricing: { name: string; price: string; features: string[]; cta: string }[];
+  pricingModel: 'subscription' | 'per-service';  // subscription → "/mo", per-service → no period
+  pricingSub: string;
   ctaHeadline: string[];
   footerTagline: string[];
   palette: Theme;
@@ -135,6 +139,8 @@ const BANKS: Record<Industry, IndustryBank> = {
       { name: 'Dinner', price: '$45', features: ['3-course chef menu', 'Wine pairing available', 'Priority reservations'], cta: 'Reserve a table' },
       { name: 'Private Events', price: 'Custom', features: ['Full venue buyout', 'Custom menu design', 'Dedicated event team'], cta: 'Plan my event' },
     ],
+    pricingModel: 'per-service',
+    pricingSub: 'Transparent pricing. Pay per visit — no subscriptions.',
     ctaHeadline: ['Your table is waiting', 'Hungry for something {adj}?'],
     footerTagline: ['Good food. Great company.', 'Taste worth remembering.'],
     palette: { primary: '#c2410c', primaryDark: '#9a3412', accent: '#f59e0b', bg: '#fffbeb', bgSoft: '#fef3c7', card: '#ffffff', text: '#1c1917', muted: '#78716c', fontDisplay: 'Georgia, serif' },
@@ -172,6 +178,8 @@ const BANKS: Record<Industry, IndustryBank> = {
       { name: 'All Access', price: '$59', features: ['24/7 full access', 'Unlimited classes', 'Quarterly assessment', 'Nutrition guide'], cta: 'Go all in' },
       { name: 'Elite', price: '$149', features: ['Everything in All Access', '4 PT sessions / month', 'Custom meal plan', 'Recovery zone access'], cta: 'Train elite' },
     ],
+    pricingModel: 'subscription',
+    pricingSub: 'No hidden fees. Cancel anytime.',
     ctaHeadline: ['Your first week is on us', 'Become {adj}. Starting today.'],
     footerTagline: ['Sweat. Repeat. Transform.', 'Strong looks good on you.'],
     palette: { primary: '#dc2626', primaryDark: '#991b1b', accent: '#f97316', bg: '#0c0a09', bgSoft: '#1c1917', card: '#1c1917', text: '#fafaf9', muted: '#a8a29e', fontDisplay: 'Arial Black, sans-serif' },
@@ -209,6 +217,8 @@ const BANKS: Record<Industry, IndustryBank> = {
       { name: 'Complete', price: '$249', features: ['Everything in Essential', 'Professional whitening', 'Night guard consult'], cta: 'Full checkup' },
       { name: 'Smile Design', price: 'Custom', features: ['Digital smile preview', 'Veneers / Invisalign', 'Dedicated coordinator'], cta: 'Design my smile' },
     ],
+    pricingModel: 'per-service',
+    pricingSub: 'Transparent pricing. Pay only for what you need.',
     ctaHeadline: ['Book your visit in 60 seconds', 'A {adj} smile is one visit away'],
     footerTagline: ['Gentle dentistry, honest pricing.', 'Your smile, our masterpiece.'],
     palette: { primary: '#0ea5e9', primaryDark: '#0369a1', accent: '#22d3ee', bg: '#f0f9ff', bgSoft: '#e0f2fe', card: '#ffffff', text: '#0c4a6e', muted: '#64748b', fontDisplay: 'Verdana, sans-serif' },
@@ -246,6 +256,8 @@ const BANKS: Record<Industry, IndustryBank> = {
       { name: 'Essential', price: '$250/hr', features: ['Contracts & review', 'Demand letters', 'Email + phone support'], cta: 'Retain us' },
       { name: 'Full Counsel', price: 'Custom', features: ['Dedicated attorney', 'Litigation & trial', 'Priority 24/7 line'], cta: 'Get protected' },
     ],
+    pricingModel: 'per-service',
+    pricingSub: 'Clear rates, agreed upfront. No surprises.',
     ctaHeadline: ['Your first consultation is free', '{adj} counsel starts with a conversation'],
     footerTagline: ['Justice, delivered.', 'We fight. You win.'],
     palette: { primary: '#1e3a8a', primaryDark: '#172554', accent: '#b45309', bg: '#eff6ff', bgSoft: '#dbeafe', card: '#ffffff', text: '#1e293b', muted: '#64748b', fontDisplay: 'Georgia, serif' },
@@ -283,6 +295,8 @@ const BANKS: Record<Industry, IndustryBank> = {
       { name: 'Seller', price: '3%', features: ['Pro photo + drone', 'Staging consult', 'Multi-channel marketing'], cta: 'Get valuation' },
       { name: 'Investor', price: 'Custom', features: ['Off-market pipeline', 'ROI analysis', 'Portfolio strategy'], cta: 'Talk strategy' },
     ],
+    pricingModel: 'per-service',
+    pricingSub: 'Free for buyers. Sellers pay at closing — nothing upfront.',
     ctaHeadline: ['Your next chapter starts here', 'Let us find your {adj} home'],
     footerTagline: ['Home is where we take you.', 'Keys to your future.'],
     palette: { primary: '#047857', primaryDark: '#065f46', accent: '#d97706', bg: '#ecfdf5', bgSoft: '#d1fae5', card: '#ffffff', text: '#064e3b', muted: '#64748b', fontDisplay: 'Georgia, serif' },
@@ -290,7 +304,7 @@ const BANKS: Record<Industry, IndustryBank> = {
   salon: {
     headlines: [
       'Look {adj}. Feel unstoppable.',
-      '{name}: where beauty gets {adj}',
+      '{name}: where every visit feels {adj}',
       'Your glow-up starts here — the {adj} way',
     ],
     subheadlines: [
@@ -320,9 +334,50 @@ const BANKS: Record<Industry, IndustryBank> = {
       { name: 'Signature', price: '$120', features: ['Full color / balayage', 'Treatment + style', 'Take-home kit'], cta: 'Go signature' },
       { name: 'Bridal', price: 'Custom', features: ['Trial session', 'Day-of glam team', 'Bridal party rates'], cta: 'Plan my day' },
     ],
+    pricingModel: 'per-service',
+    pricingSub: 'Pay per visit. No memberships, no fine print.',
     ctaHeadline: ['Book your glow-up', 'Look {adj} by this weekend'],
     footerTagline: ['Beauty, perfected.', 'You deserve this chair.'],
     palette: { primary: '#db2777', primaryDark: '#9d174d', accent: '#f59e0b', bg: '#fdf2f8', bgSoft: '#fce7f3', card: '#ffffff', text: '#500f28', muted: '#9d7c8c', fontDisplay: 'Georgia, serif' },
+  },
+  barber: {
+    headlines: [
+      'Sharp looks. {adj} service. Zero waiting.',
+      '{name}: where every cut is {adj}',
+      'Walk in ordinary. Walk out {adj}.',
+    ],
+    subheadlines: [
+      '{desc} — precision cuts, straight-razor shaves and beard sculpting by master barbers.',
+      'Classic craft, modern style: {desc}. Book your chair in 30 seconds.',
+    ],
+    badge: ['Walk-ins welcome', 'Master barbers', 'Book online in seconds'],
+    features: [
+      { icon: '💈', title: 'Precision Cuts', description: 'Classic tapers, skin fades and scissor work — tailored to your head shape and style.' },
+      { icon: '🪒', title: 'Straight-Razor Shaves', description: 'Hot towel, rich lather, a single blade. The closest, smoothest shave of your life.' },
+      { icon: '🧔', title: 'Beard Sculpting', description: 'Shape, line-up and hot-towel conditioning — turn the beard into the main feature.' },
+      { icon: '🔥', title: 'Hot Towel Finish', description: 'Every service ends with a hot towel and a style — walk out ready for anything.' },
+    ],
+    featuresHeadline: 'The chair is waiting',
+    stats: [
+      { value: '12k+', label: 'Cuts delivered' },
+      { value: '4.9★', label: 'Client rating' },
+      { value: '8', label: 'Master barbers' },
+    ],
+    testimonials: [
+      { name: 'Marcus Webb', role: 'Client since 2021', quote: 'Best fade in the city, no contest. I do not trust anyone else with my hair anymore.' },
+      { name: 'Diego Fuentes', role: 'Straight-razor convert', quote: 'The hot towel shave is something every man should try once. Then every week.' },
+      { name: 'James Okafor', role: 'Beard client', quote: 'They turned my patchy mess into a beard that gets compliments from strangers.' },
+    ],
+    pricing: [
+      { name: 'Classic Cut', price: '$25', features: ['Precision cut', 'Wash + style', 'Hot towel finish'], cta: 'Book a cut' },
+      { name: 'Cut + Beard', price: '$45', features: ['Everything in Classic', 'Beard sculpt + line-up', 'Beard oil treatment'], cta: 'Book the combo' },
+      { name: 'The Full Works', price: '$65', features: ['Cut + beard', 'Straight-razor shave', 'Facial + style consult'], cta: 'Go full works' },
+    ],
+    pricingModel: 'per-service',
+    pricingSub: 'Pay per visit. No memberships, no fine print.',
+    ctaHeadline: ['Your chair is ready', 'Look {adj} by tonight'],
+    footerTagline: ['Stay sharp.', 'A cut above the rest.'],
+    palette: { primary: '#b45309', primaryDark: '#92400e', accent: '#f59e0b', bg: '#1c1917', bgSoft: '#292524', card: '#292524', text: '#fafaf9', muted: '#a8a29e', fontDisplay: 'Georgia, serif' },
   },
   saas: {
     headlines: [
@@ -357,6 +412,8 @@ const BANKS: Record<Industry, IndustryBank> = {
       { name: 'Growth', price: '$49', features: ['Unlimited users', 'All integrations', 'Priority support', 'Advanced analytics'], cta: 'Scale with us' },
       { name: 'Enterprise', price: 'Custom', features: ['SSO/SAML', 'Dedicated CSM', 'Custom SLA', 'Onboarding team'], cta: 'Talk to sales' },
     ],
+    pricingModel: 'subscription',
+    pricingSub: 'No hidden fees. Cancel anytime.',
     ctaHeadline: ['Start your free trial today', 'Join 12,000+ {adj} teams'],
     footerTagline: ['Software that ships.', 'Built for builders.'],
     palette: { primary: '#7c3aed', primaryDark: '#5b21b6', accent: '#06b6d4', bg: '#faf5ff', bgSoft: '#f3e8ff', card: '#ffffff', text: '#1e1b4b', muted: '#6b7280', fontDisplay: 'Inter, system-ui, sans-serif' },
@@ -391,9 +448,11 @@ const BANKS: Record<Industry, IndustryBank> = {
     ],
     pricing: [
       { name: 'Insider', price: 'Free', features: ['Early access to drops', 'Birthday discount', 'Order tracking'], cta: 'Join free' },
-      { name: 'Plus', price: '$9/mo', features: ['Free shipping, no minimum', '10% off everything', 'Exclusive drops'], cta: 'Go Plus' },
-      { name: 'VIP', price: '$29/mo', features: ['Everything in Plus', '20% off everything', 'Personal shopper', 'Free express upgrades'], cta: 'Go VIP' },
+      { name: 'Plus', price: '$9', features: ['Free shipping, no minimum', '10% off everything', 'Exclusive drops'], cta: 'Go Plus' },
+      { name: 'VIP', price: '$29', features: ['Everything in Plus', '20% off everything', 'Personal shopper', 'Free express upgrades'], cta: 'Go VIP' },
     ],
+    pricingModel: 'subscription',
+    pricingSub: 'Memberships that pay for themselves. Cancel anytime.',
     ctaHeadline: ['Start shopping smarter', 'Your cart deserves {adj}'],
     footerTagline: ['Curated. Delivered. Loved.', 'Shop happy.'],
     palette: { primary: '#ea580c', primaryDark: '#9a3412', accent: '#84cc16', bg: '#fff7ed', bgSoft: '#ffedd5', card: '#ffffff', text: '#431407', muted: '#78716c', fontDisplay: 'Inter, system-ui, sans-serif' },
@@ -431,13 +490,15 @@ const BANKS: Record<Industry, IndustryBank> = {
       { name: 'Event', price: '$899', features: ['Half-day coverage', '300 edited photos', 'Print release'], cta: 'Book event' },
       { name: 'Wedding', price: '$2,499', features: ['Full-day coverage', 'Two photographers', 'Fine art album'], cta: 'Check my date' },
     ],
+    pricingModel: 'per-service',
+    pricingSub: 'One honest price per session. No upsells, ever.',
     ctaHeadline: ['Let us tell your story', 'Dates fill fast — book {adj}'],
     footerTagline: ['Captured forever.', 'Light, emotion, art.'],
     palette: { primary: '#0f766e', primaryDark: '#134e4a', accent: '#f59e0b', bg: '#f0fdfa', bgSoft: '#ccfbf1', card: '#ffffff', text: '#134e4a', muted: '#64748b', fontDisplay: 'Georgia, serif' },
   },
   consulting: {
     headlines: [
-      '{adj} strategy for {adj} growth',
+      '{adj} strategy for real growth',
       '{name}: clarity that drives {adj} results',
       'Stop guessing. Start growing — the {adj} way.',
     ],
@@ -468,6 +529,8 @@ const BANKS: Record<Industry, IndustryBank> = {
       { name: 'Sprint', price: '$8,000', features: ['6-week engagement', 'Embedded consultant', 'Playbook delivery'], cta: 'Book sprint' },
       { name: 'Partner', price: 'Custom', features: ['Quarterly retainer', 'On-call advisors', 'Board-level reporting'], cta: 'Become partner' },
     ],
+    pricingModel: 'per-service',
+    pricingSub: 'Fixed-scope pricing. You know the cost before we start.',
     ctaHeadline: ['Let us find your leverage', 'One call. {adj} clarity.'],
     footerTagline: ['Strategy, executed.', 'Growth is a system.'],
     palette: { primary: '#334155', primaryDark: '#0f172a', accent: '#0ea5e9', bg: '#f8fafc', bgSoft: '#e2e8f0', card: '#ffffff', text: '#0f172a', muted: '#64748b', fontDisplay: 'Georgia, serif' },
@@ -478,11 +541,13 @@ const BANKS: Record<Industry, IndustryBank> = {
 const SAAS_VERBS = ['automate work', 'close deals', 'ship product', 'grow revenue', 'delight customers'];
 
 function fill(template: string, name: string, adj: string, desc: string, rnd: () => number): string {
-  return template
+  const out = template
     .replaceAll('{name}', name)
     .replaceAll('{adj}', adj)
     .replaceAll('{desc}', desc.length > 120 ? desc.slice(0, 117) + '...' : desc)
     .replaceAll('{verb}', pick(rnd, SAAS_VERBS));
+  // fix a/an before vowel-starting adjectives ("a unforgettable" → "an unforgettable")
+  return out.replace(/\b([Aa]) ([aeiouAEIOU])/g, '$1n $2');
 }
 
 function initials(name: string): string {
@@ -503,7 +568,7 @@ export function generateLanding(input: LandingInput, seed?: number): LandingData
   const tiers = bank.pricing.map((p, i) => ({
     ...p,
     price: p.price,
-    period: p.price === 'Free' || p.price === 'Custom' ? '' : '/mo',
+    period: (p.price === 'Free' || p.price === 'Custom' || bank.pricingModel === 'per-service') ? '' : '/mo',
     highlighted: i === 1,
   }));
 
@@ -521,6 +586,7 @@ export function generateLanding(input: LandingInput, seed?: number): LandingData
     featuresSub: `${tone.trust[Math.floor(rnd() * tone.trust.length)]} · ${name}`,
     testimonials,
     pricing: tiers,
+    pricingSub: bank.pricingSub,
     cta: {
       headline: fill(pick(rnd, bank.ctaHeadline), name, adj, desc, rnd),
       subheadline: `Join thousands who chose ${name}. ${pick(rnd, tone.trust)}.`,
@@ -593,7 +659,7 @@ footer{text-align:center;padding:40px 0;color:${t.muted};font-size:.9rem}
 <div class="grid">${data.features.map(f => `<div class="card"><div class="icon">${f.icon}</div><h3>${esc(f.title)}</h3><p>${esc(f.description)}</p></div>`).join('')}</div></section>
 <section><h2>Loved by our customers</h2><p class="sec-sub">Real stories, real results</p>
 <div class="grid">${data.testimonials.map(x => `<div class="card"><p class="testi">"${esc(x.quote)}"</p><div class="who"><div class="avatar">${x.initials}</div><div><b>${esc(x.name)}</b><span>${esc(x.role)}</span></div></div></div>`).join('')}</div></section>
-<section><h2>Simple, honest pricing</h2><p class="sec-sub">No hidden fees. Cancel anytime.</p>
+<section><h2>Simple, honest pricing</h2><p class="sec-sub">${esc(data.pricingSub)}</p>
 <div class="grid">${data.pricing.map(p => `<div class="card price-card${p.highlighted ? ' hl' : ''}"><h3>${esc(p.name)}</h3><div class="price">${esc(p.price)}<span style="font-size:1rem;color:${t.muted}">${esc(p.period)}</span></div><ul class="feat-list">${p.features.map(f => `<li>${esc(f)}</li>`).join('')}</ul><a class="btn" href="#">${esc(p.cta)}</a></div>`).join('')}</div></section>
 <div class="cta-final"><h2>${esc(data.cta.headline)}</h2><p>${esc(data.cta.subheadline)}</p><a class="btn" href="#">${esc(data.cta.button)}</a></div>
 <footer><div class="logo" style="margin-bottom:8px">${esc(input.businessName)}</div><p>${esc(data.footerTagline)}</p><p style="margin-top:12px">© 2026 ${esc(input.businessName)}. All rights reserved.</p></footer>
