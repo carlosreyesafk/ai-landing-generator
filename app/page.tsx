@@ -4,20 +4,21 @@ import { useState, useCallback } from 'react';
 import { generateLanding, landingToHTML, INDUSTRIES, TONES, type LandingInput, type LandingData, type Industry, type Tone } from '@/lib/generator';
 
 export default function Home() {
-  const [input, setInput] = useState<LandingInput>({
-    businessName: 'Bloom & Bean',
-    description: 'a cozy specialty coffee shop with single-origin beans and homemade pastries',
-    industry: 'restaurant',
-    tone: 'professional',
-  });
+  // Selection state lives in dedicated hooks so regenerate can NEVER clear it
+  const [businessName, setBusinessName] = useState('Bloom & Bean');
+  const [description, setDescription] = useState('a cozy specialty coffee shop with single-origin beans and homemade pastries');
+  const [industry, setIndustry] = useState<Industry>('restaurant');
+  const [tone, setTone] = useState<Tone>('professional');
   const [landing, setLanding] = useState<LandingData | null>(null);
   const [copied, setCopied] = useState(false);
 
+  const input: LandingInput = { businessName, description, industry, tone };
+
   const generate = useCallback((newSeed?: number) => {
     const s = newSeed ?? Math.floor(Math.random() * 1e9);
-    setLanding(generateLanding(input, s));
+    setLanding(generateLanding({ businessName, description, industry, tone }, s));
     setCopied(false);
-  }, [input]);
+  }, [businessName, description, industry, tone]);
 
   const copyHTML = async () => {
     if (!landing) return;
@@ -64,16 +65,16 @@ export default function Home() {
 
           <label className="block text-sm text-slate-400 mb-1.5">Business name</label>
           <input
-            value={input.businessName}
-            onChange={e => setInput({ ...input, businessName: e.target.value })}
+            value={businessName}
+            onChange={e => setBusinessName(e.target.value)}
             placeholder="e.g. Bloom & Bean"
             className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2.5 mb-4 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
           />
 
           <label className="block text-sm text-slate-400 mb-1.5">What do you do? (1–2 sentences)</label>
           <textarea
-            value={input.description}
-            onChange={e => setInput({ ...input, description: e.target.value })}
+            value={description}
+            onChange={e => setDescription(e.target.value)}
             placeholder="e.g. a cozy specialty coffee shop with single-origin beans and homemade pastries"
             rows={3}
             className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2.5 mb-4 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 resize-none"
@@ -84,8 +85,8 @@ export default function Home() {
             {INDUSTRIES.map(ind => (
               <button
                 key={ind.value}
-                onClick={() => setInput({ ...input, industry: ind.value as Industry })}
-                className={`px-3 py-2 rounded-lg text-sm text-left transition border ${input.industry === ind.value ? 'bg-violet-600/20 border-violet-500 text-violet-200' : 'bg-slate-800 border-slate-700 text-slate-300 hover:border-slate-600'}`}
+                onClick={() => setIndustry(ind.value as Industry)}
+                className={`px-3 py-2 rounded-lg text-sm text-left transition border ${industry === ind.value ? 'bg-violet-600/20 border-violet-500 text-violet-200' : 'bg-slate-800 border-slate-700 text-slate-300 hover:border-slate-600'}`}
               >
                 {ind.label}
               </button>
@@ -97,8 +98,8 @@ export default function Home() {
             {TONES.map(t => (
               <button
                 key={t.value}
-                onClick={() => setInput({ ...input, tone: t.value as Tone })}
-                className={`w-full px-4 py-2.5 rounded-lg text-sm text-left transition border ${input.tone === t.value ? 'bg-violet-600/20 border-violet-500' : 'bg-slate-800 border-slate-700 hover:border-slate-600'}`}
+                onClick={() => setTone(t.value as Tone)}
+                className={`w-full px-4 py-2.5 rounded-lg text-sm text-left transition border ${tone === t.value ? 'bg-violet-600/20 border-violet-500' : 'bg-slate-800 border-slate-700 hover:border-slate-600'}`}
               >
                 <span className="font-medium text-slate-200">{t.label}</span>
                 <span className="text-slate-400"> — {t.hint}</span>
@@ -214,7 +215,7 @@ function LandingPreview({ input, data }: { input: LandingInput; data: LandingDat
         {/* pricing */}
         <div className="py-12">
           <h2 className="text-2xl font-bold text-center mb-2">Simple, honest pricing</h2>
-          <p className="text-center text-sm mb-8" style={{ color: t.muted }}>No hidden fees. Cancel anytime.</p>
+          <p className="text-center text-sm mb-8" style={{ color: t.muted }}>{data.pricingSub}</p>
           <div className="grid sm:grid-cols-3 gap-4">
             {data.pricing.map((p, i) => (
               <div key={i} className="rounded-2xl p-6 text-center border-2" style={{ background: t.card, borderColor: p.highlighted ? t.primary : t.bgSoft, transform: p.highlighted ? 'scale(1.03)' : 'none' }}>
