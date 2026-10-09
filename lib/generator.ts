@@ -108,7 +108,7 @@ interface IndustryBank {
 const BANKS: Record<Industry, IndustryBank> = {
   restaurant: {
     headlines: [
-      'Where every meal becomes a {adj} memory',
+      'Dinner, the {adj} way',
       '{name}: taste the {adj} difference',
       'Dinner deserves to be {adj}',
     ],
@@ -141,7 +141,7 @@ const BANKS: Record<Industry, IndustryBank> = {
     ],
     pricingModel: 'per-service',
     pricingSub: 'Transparent pricing. Pay per visit — no subscriptions.',
-    ctaHeadline: ['Your table is waiting', 'Hungry for something {adj}?'],
+    ctaHeadline: ['Your table is waiting', 'Taste what everyone is talking about'],
     footerTagline: ['Good food. Great company.', 'Taste worth remembering.'],
     palette: { primary: '#c2410c', primaryDark: '#9a3412', accent: '#f59e0b', bg: '#fffbeb', bgSoft: '#fef3c7', card: '#ffffff', text: '#1c1917', muted: '#78716c', fontDisplay: 'Georgia, serif' },
   },
@@ -149,7 +149,7 @@ const BANKS: Record<Industry, IndustryBank> = {
     headlines: [
       'Stronger every rep. {adj} results, guaranteed.',
       'Your {adj} transformation starts at {name}',
-      'Stop waiting. Start becoming {adj}.',
+      'Stop waiting. Start your {adj} transformation.',
     ],
     subheadlines: [
       '{desc} — expert coaching, real programming, and a community that refuses to let you quit.',
@@ -180,14 +180,14 @@ const BANKS: Record<Industry, IndustryBank> = {
     ],
     pricingModel: 'subscription',
     pricingSub: 'No hidden fees. Cancel anytime.',
-    ctaHeadline: ['Your first week is on us', 'Become {adj}. Starting today.'],
+    ctaHeadline: ['Your first week is on us', 'Your strongest self starts today.'],
     footerTagline: ['Sweat. Repeat. Transform.', 'Strong looks good on you.'],
     palette: { primary: '#dc2626', primaryDark: '#991b1b', accent: '#f97316', bg: '#0c0a09', bgSoft: '#1c1917', card: '#1c1917', text: '#fafaf9', muted: '#a8a29e', fontDisplay: 'Arial Black, sans-serif' },
   },
   dental: {
     headlines: [
-      'A {adj} smile changes everything',
-      '{name}: dentistry that feels {adj}',
+      'Great smiles change everything',
+      '{name}: {adj} dentistry, zero fear',
       'Love your smile again — the {adj} way',
     ],
     subheadlines: [
@@ -219,7 +219,7 @@ const BANKS: Record<Industry, IndustryBank> = {
     ],
     pricingModel: 'per-service',
     pricingSub: 'Transparent pricing. Pay only for what you need.',
-    ctaHeadline: ['Book your visit in 60 seconds', 'A {adj} smile is one visit away'],
+    ctaHeadline: ['Book your visit in 60 seconds', 'Your best smile is one visit away'],
     footerTagline: ['Gentle dentistry, honest pricing.', 'Your smile, our masterpiece.'],
     palette: { primary: '#0ea5e9', primaryDark: '#0369a1', accent: '#22d3ee', bg: '#f0f9ff', bgSoft: '#e0f2fe', card: '#ffffff', text: '#0c4a6e', muted: '#64748b', fontDisplay: 'Verdana, sans-serif' },
   },
@@ -303,13 +303,13 @@ const BANKS: Record<Industry, IndustryBank> = {
   },
   salon: {
     headlines: [
-      'Look {adj}. Feel unstoppable.',
-      '{name}: where every visit feels {adj}',
-      'Your glow-up starts here — the {adj} way',
+      'Your {adj} glow-up starts here',
+      '{name}: where every visit feels special',
+      'Look stunning. Feel unstoppable.',
     ],
     subheadlines: [
       '{desc} — expert stylists, premium products, and an hour that is entirely yours.',
-      'Hair, nails, skin: {desc}. Walk in ordinary, walk out unforgettable.',
+      'Hair, nails, skin: {desc}. Walk in stressed, walk out radiant.',
     ],
     badge: ['Book online in seconds', 'Premium product lines', 'Master stylists'],
     features: [
@@ -336,7 +336,7 @@ const BANKS: Record<Industry, IndustryBank> = {
     ],
     pricingModel: 'per-service',
     pricingSub: 'Pay per visit. No memberships, no fine print.',
-    ctaHeadline: ['Book your glow-up', 'Look {adj} by this weekend'],
+    ctaHeadline: ['Book your glow-up', 'Your chair is waiting this weekend'],
     footerTagline: ['Beauty, perfected.', 'You deserve this chair.'],
     palette: { primary: '#db2777', primaryDark: '#9d174d', accent: '#f59e0b', bg: '#fdf2f8', bgSoft: '#fce7f3', card: '#ffffff', text: '#500f28', muted: '#9d7c8c', fontDisplay: 'Georgia, serif' },
   },
@@ -344,7 +344,7 @@ const BANKS: Record<Industry, IndustryBank> = {
     headlines: [
       'Sharp looks. {adj} service. Zero waiting.',
       '{name}: where every cut is {adj}',
-      'Walk in ordinary. Walk out {adj}.',
+      'Walk in scruffy. Walk out sharp.',
     ],
     subheadlines: [
       '{desc} — precision cuts, straight-razor shaves and beard sculpting by master barbers.',
@@ -375,7 +375,7 @@ const BANKS: Record<Industry, IndustryBank> = {
     ],
     pricingModel: 'per-service',
     pricingSub: 'Pay per visit. No memberships, no fine print.',
-    ctaHeadline: ['Your chair is ready', 'Look {adj} by tonight'],
+    ctaHeadline: ['Your chair is ready', 'Walk out sharp tonight.'],
     footerTagline: ['Stay sharp.', 'A cut above the rest.'],
     palette: { primary: '#b45309', primaryDark: '#92400e', accent: '#f59e0b', bg: '#1c1917', bgSoft: '#292524', card: '#292524', text: '#fafaf9', muted: '#a8a29e', fontDisplay: 'Georgia, serif' },
   },
@@ -459,9 +459,9 @@ const BANKS: Record<Industry, IndustryBank> = {
   },
   photography: {
     headlines: [
-      'Moments, made {adj} forever',
-      '{name}: photography that feels {adj}',
-      'Your story deserves {adj} images',
+      '{adj} moments, kept forever',
+      '{name}: photography with soul',
+      'Your story deserves beautiful images',
     ],
     subheadlines: [
       '{desc} — candid, emotional photography with zero awkward posing.',
@@ -492,7 +492,7 @@ const BANKS: Record<Industry, IndustryBank> = {
     ],
     pricingModel: 'per-service',
     pricingSub: 'One honest price per session. No upsells, ever.',
-    ctaHeadline: ['Let us tell your story', 'Dates fill fast — book {adj}'],
+    ctaHeadline: ['Let us tell your story', 'Dates fill fast — reserve yours'],
     footerTagline: ['Captured forever.', 'Light, emotion, art.'],
     palette: { primary: '#0f766e', primaryDark: '#134e4a', accent: '#f59e0b', bg: '#f0fdfa', bgSoft: '#ccfbf1', card: '#ffffff', text: '#134e4a', muted: '#64748b', fontDisplay: 'Georgia, serif' },
   },
@@ -541,13 +541,13 @@ const BANKS: Record<Industry, IndustryBank> = {
 const SAAS_VERBS = ['automate work', 'close deals', 'ship product', 'grow revenue', 'delight customers'];
 
 function fill(template: string, name: string, adj: string, desc: string, rnd: () => number): string {
-  const out = template
+  // NOTE: {name} is ALWAYS used literally — never modified, conjugated, or altered.
+  // Templates are written to be grammatically correct without post-processing.
+  return template
     .replaceAll('{name}', name)
     .replaceAll('{adj}', adj)
     .replaceAll('{desc}', desc.length > 120 ? desc.slice(0, 117) + '...' : desc)
     .replaceAll('{verb}', pick(rnd, SAAS_VERBS));
-  // fix a/an before vowel-starting adjectives ("a unforgettable" → "an unforgettable")
-  return out.replace(/\b([Aa]) ([aeiouAEIOU])/g, '$1n $2');
 }
 
 function initials(name: string): string {
